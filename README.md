@@ -2,8 +2,7 @@
 
 Keep track of your builds inside Atom. You can click on the status bar text or run `jenkins:list` to open a pane that will list all failing builds and allow you to view the build output inside atom.
 
-![status](status.png)
-![list](list.png)
+![preview](preview.png)
 
 ## Setup
 
