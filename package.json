@@ -2,7 +2,6 @@
   "name": "jenkins",
   "main": "./lib/jenkins",
   "version": "0.1.0",
-  "private": true,
   "description": "Show jenkins build status in atom",
   "activationEvents": ["jenkins:toggle", "jenkins:list"],
   "repository": "https://github.com/benmills/atom-jenkins",
