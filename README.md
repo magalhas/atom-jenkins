@@ -19,3 +19,7 @@ Make sure you set your basic auth username and password as well as the URL Atom 
 
 * `jenkins:toggle` Show a status bar item with the number of failing builds. If you click it a list pane will show.
 * `jenkins:list` Show a list of all failing builds which can be clicked to show the current output of the build inside Atom.
+
+## Credits
+
+This package was initially authored by [Ben Mills](https://github.com/benmills) and is now maintained and developed by [José Magalhães](https://github.com/magalhas).
