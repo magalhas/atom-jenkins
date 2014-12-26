@@ -2,8 +2,6 @@
 
 Keep track of your builds inside Atom. You can click on the status bar text or run `jenkins:list` to open a pane that will list all failing builds and allow you to view the build output inside atom.
 
-![preview](preview.png)
-
 ## Setup
 
 Make sure you set your basic auth username and password as well as the URL Atom will hit to get your `cc.xml` file and jobs. Here is an example:
