@@ -6,13 +6,13 @@ Keep track of your builds inside Atom. You can click on the status bar text or r
 
 ## Setup
 
-Make sure you set your basic auth username and password as well as the URL Atom will hit to get your `cc.xml` file. Here is an example:
+Make sure you set your basic auth username and password as well as the URL Atom will hit to get your `cc.xml` file and jobs. Here is an example:
 
 ```cson
 'jenkins':
   'username': 'my_user'
   'password': 'my_pass'
-  'ccxmlUrl': 'https://my.jenkins/cc.xml'
+  'url': 'https://my.jenkins'
 ```
 
 ## Commands
