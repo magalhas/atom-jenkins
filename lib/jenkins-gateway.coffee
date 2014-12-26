@@ -1,4 +1,3 @@
-{View} = require 'atom'
 rest = require 'restler'
 xml2js = require 'xml2js'
 
