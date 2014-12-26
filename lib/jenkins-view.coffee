@@ -13,7 +13,7 @@ class JenkinsView extends View
   initialize: (serializeState) ->
     @failedBuilds = []
 
-    if serializeState and serializeState.isActive
+    if not serializeState or serializeState.isActive
       atom.packages.once 'activated', => @toggle()
 
     atom.workspaceView.command "jenkins:list", ".editor", =>
