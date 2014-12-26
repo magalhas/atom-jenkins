@@ -35,9 +35,9 @@ module.exports = {
     _get atom.config.get("jenkins.url") + '/cc.xml', (data) ->
       xml2js.parseString data, (err, result) =>
         if err
-          console.log(err)
-          console.log(data)
-          cb("failed to reach jenkins.ccxmlUrl #{atom.config.get("jenkins.url")}", [])
+          console.error(err)
+          console.error(data)
+          cb("failed to reach jenkins.url #{atom.config.get("jenkins.url")}", [])
         else
           result.Projects.Project.forEach (project) =>
             if project.$.lastBuildStatus != "Success"
