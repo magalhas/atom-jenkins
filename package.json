@@ -4,7 +4,11 @@
   "version": "0.1.0",
   "description": "Show jenkins build status in atom",
   "activationEvents": ["jenkins:toggle", "jenkins:list"],
-  "repository": "https://github.com/benmills/atom-jenkins",
+  "repository": "https://github.com/magalhas/atom-jenkins",
+  "author": "Ben Mills <ben@benmills.org> (https://github.com/benmills)",
+  "contributors": [
+    "José Magalhães <magalhas@gmail.com> (https://github.com/magalhas)"
+  ],
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
