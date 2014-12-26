@@ -1,7 +1,7 @@
 {
   "name": "jenkins",
   "main": "./lib/jenkins",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Show jenkins build status in atom",
   "repository": "https://github.com/magalhas/atom-jenkins",
   "author": "Ben Mills <ben@benmills.org> (https://github.com/benmills)",
