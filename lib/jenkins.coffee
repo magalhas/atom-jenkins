@@ -1,6 +1,11 @@
 JenkinsView = require './jenkins-view'
 
 module.exports =
+  configDefaults:
+    username: ''
+    password: ''
+    url: ''
+
   jenkinsView: null
 
   activate: (state) ->
