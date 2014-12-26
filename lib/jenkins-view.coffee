@@ -8,7 +8,7 @@ module.exports =
 class JenkinsView extends View
   @content: ->
     @div class: 'jenkins inline-block', =>
-      @div "Getting Jenkins Status...", class: "message", outlet: 'status'
+      @div class: "status inline-block requesting", outlet: 'status'
 
   initialize: (serializeState) ->
     @failedBuilds = []
@@ -47,7 +47,7 @@ class JenkinsView extends View
       clearInterval(@ticker)
       @detach()
     else
-      atom.workspaceView.statusBar.appendRight(this)
+      atom.workspaceView.statusBar.appendLeft(this)
       @status.click (e) =>
         @list()
 
@@ -62,8 +62,12 @@ class JenkinsView extends View
       @failedBuilds = failedBuilds
 
       if @failedBuilds.length > 0
-        @status.html("<span>#{@failedBuilds.length} failing builds.</span>")
-        @status.css("color", "red")
+        @status
+          .removeClass('requesting success')
+          .addClass('error pointer')
+          .attr('title', '#{@failedBuilds.length} failing builds.')
       else
-        @status.text("All builds passing")
-        @status.css("color", "green")
+        @status
+          .removeClass('requesting error')
+          .addClass('success')
+          .attr('title', 'All builds passing.')
