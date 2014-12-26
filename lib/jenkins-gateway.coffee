@@ -1,7 +1,6 @@
 {View} = require 'atom'
 rest = require 'restler'
 xml2js = require 'xml2js'
-_ = require "lodash"
 
 _checkConfig = () ->
   atom.config.get('jenkins.username') &&
@@ -40,7 +39,7 @@ module.exports = {
           console.log(data)
           cb("failed to reach jenkins.ccxmlUrl #{atom.config.get("jenkins.url")}", [])
         else
-          _(result.Projects.Project).forEach (project) =>
+          result.Projects.Project.forEach (project) =>
             if project.$.lastBuildStatus != "Success"
               failedBuilds.push(project.$)
           cb(undefined, failedBuilds)

@@ -2,7 +2,6 @@ JenkinsGateway = require './jenkins-gateway'
 {View} = require 'atom'
 rest = require 'restler'
 xml2js = require 'xml2js'
-_ = require "lodash"
 BuildListView = require './build-list-view'
 
 module.exports =
@@ -21,6 +20,7 @@ class JenkinsView extends View
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
+
 
   # Tear down any state and detach
   destroy: ->

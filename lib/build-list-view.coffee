@@ -1,7 +1,6 @@
 {ScrollView} = require 'atom'
 JenkinsGateway = require './jenkins-gateway'
 rest = require 'restler'
-_ = require 'lodash'
 path = require 'path'
 
 module.exports =
@@ -31,7 +30,7 @@ class BuildListView extends ScrollView
     @clear()
     $title = @append("<h2>#{builds.length} failing builds</h2>")
     $title.css("color", "red")
-    _(builds).forEach (build) =>
+    builds.forEach (build) =>
       jenkinsUrl = atom.config.get 'jenkins.url'
       build.webUrl = build.webUrl.replace /^.*(\/job.*)$/, jenkinsUrl + '$1'
       @appendBuild(build)
