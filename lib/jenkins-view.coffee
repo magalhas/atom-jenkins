@@ -1,5 +1,5 @@
-JenkinsGateway = require './jenkins-gateway'
 {View} = require 'atom'
+JenkinsGateway = require './jenkins-gateway'
 rest = require 'restler'
 xml2js = require 'xml2js'
 BuildListView = require './build-list-view'
@@ -12,6 +12,10 @@ class JenkinsView extends View
 
   initialize: (serializeState) ->
     @failedBuilds = []
+
+    if serializeState and serializeState.isActive
+      atom.packages.once 'activated', => @toggle()
+
     atom.workspaceView.command "jenkins:list", ".editor", =>
       JenkinsGateway.getFailingBuilds (err, failingBuilds) =>
         @failedBuilds = failingBuilds
@@ -20,7 +24,7 @@ class JenkinsView extends View
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
-
+    isActive: @isActive
 
   # Tear down any state and detach
   destroy: ->
@@ -38,6 +42,7 @@ class JenkinsView extends View
       view.scrollToBottom()
 
   toggle: ->
+    @isActive = !@isActive
     if @hasParent()
       clearInterval(@ticker)
       @detach()
