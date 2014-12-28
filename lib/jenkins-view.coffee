@@ -51,7 +51,7 @@ class JenkinsView extends View
       @status.click (e) =>
         @list()
 
-      @ticker = setInterval((=> @updateStatusBar()), 5000)
+      @ticker = setInterval((=> @updateStatusBar()), atom.config.get('jenkins.interval'))
       @updateStatusBar()
 
   updateStatusBar: ->

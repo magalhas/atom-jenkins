@@ -5,6 +5,7 @@ module.exports =
     username: ''
     password: ''
     url: ''
+    interval: 60000
 
   jenkinsView: null
 
