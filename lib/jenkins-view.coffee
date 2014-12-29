@@ -57,17 +57,18 @@ class JenkinsView extends View
   updateStatusBar: ->
     JenkinsGateway.getFailingBuilds (err, failedBuilds) =>
       if err
+        @status.attr('title', err.toString())
         console.error(err)
-
-      @failedBuilds = failedBuilds
-
-      if @failedBuilds.length > 0
-        @status
-          .removeClass('requesting success')
-          .addClass('error pointer')
-          .attr('title', '#{@failedBuilds.length} failing builds.')
       else
-        @status
-          .removeClass('requesting error')
-          .addClass('success')
-          .attr('title', 'All builds passing.')
+        @failedBuilds = failedBuilds
+
+        if @failedBuilds.length > 0
+          @status
+            .removeClass('requesting success')
+            .addClass('error pointer')
+            .attr('title', '#{@failedBuilds.length} failing builds.')
+        else
+          @status
+            .removeClass('requesting error')
+            .addClass('success')
+            .attr('title', 'All builds passing.')
