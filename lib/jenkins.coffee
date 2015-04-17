@@ -17,3 +17,6 @@ module.exports =
 
   serialize: ->
     jenkinsViewState: @jenkinsView.serialize()
+
+  consumeStatusBar: (statusBar) ->
+    @jenkinsView.consumeStatusBar(statusBar);

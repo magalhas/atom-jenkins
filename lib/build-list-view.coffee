@@ -1,4 +1,4 @@
-{ScrollView} = require 'atom'
+{ScrollView} = require 'atom-space-pen-views'
 JenkinsGateway = require './jenkins-gateway'
 rest = require 'restler'
 path = require 'path'

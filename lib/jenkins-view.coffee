@@ -1,4 +1,4 @@
-{View} = require 'atom'
+{View} = require 'atom-space-pen-views'
 JenkinsGateway = require './jenkins-gateway'
 rest = require 'restler'
 xml2js = require 'xml2js'
@@ -13,14 +13,11 @@ class JenkinsView extends View
   initialize: (serializeState) ->
     @failedBuilds = []
 
-    if not serializeState or serializeState.isActive
-      atom.packages.once 'activated', => @toggle()
-
-    atom.workspaceView.command "jenkins:list", ".editor", =>
-      JenkinsGateway.getFailingBuilds (err, failingBuilds) =>
-        @failedBuilds = failingBuilds
-        @list()
-    atom.workspaceView.command "jenkins:toggle", ".editor", => @toggle()
+    atom.commands.add "atom-text-editor",
+      "jenkins:list": =>
+        JenkinsGateway.getFailingBuilds (err, failingBuilds) =>
+          @failedBuilds = failingBuilds
+          @list()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -33,26 +30,13 @@ class JenkinsView extends View
   list: ->
     if @failedBuilds.length > 0
       view = new BuildListView()
-      panes = atom.workspaceView.getPaneViews()
+      panes = atom.views.getView(atom.workspace).getPaneViews()
       pane = panes[panes.length - 1].splitRight(@runnerView)
       pane.activateItem(view)
       window.test_pane = pane
 
       view.displayBuilds(@failedBuilds)
       view.scrollToBottom()
-
-  toggle: ->
-    @isActive = !@isActive
-    if @hasParent()
-      clearInterval(@ticker)
-      @detach()
-    else
-      atom.workspaceView.statusBar.appendLeft(this)
-      @status.click (e) =>
-        @list()
-
-      @ticker = setInterval((=> @updateStatusBar()), atom.config.get('jenkins.interval'))
-      @updateStatusBar()
 
   updateStatusBar: ->
     JenkinsGateway.getFailingBuilds (err, failedBuilds) =>
@@ -72,3 +56,11 @@ class JenkinsView extends View
             .removeClass('requesting error')
             .addClass('success')
             .attr('title', 'All builds passing.')
+
+  consumeStatusBar: (statusBar) ->
+    statusBar.addLeftTile(item: this)
+    @status.click (e) =>
+      @list()
+
+    @ticker = setInterval((=> @updateStatusBar()), atom.config.get('jenkins.interval'))
+    @updateStatusBar()
