@@ -30,7 +30,7 @@ class JenkinsView extends View
   list: ->
     if @failedBuilds.length > 0
       view = new BuildListView()
-      panes = atom.views.getView(atom.workspace).getPaneViews()
+      panes = atom.workspace.getPanes()
       pane = panes[panes.length - 1].splitRight(@runnerView)
       pane.activateItem(view)
       window.test_pane = pane
