@@ -4,15 +4,14 @@ rest = require 'restler'
 xml2js = require 'xml2js'
 
 _checkConfig = () ->
-  atom.config.get('jenkins.username') &&
-  atom.config.get('jenkins.password') &&
   atom.config.get('jenkins.url')
 
 _get = (url, cb) ->
-  options = {
+  httpAuthOptions = {
     username: atom.config.get('jenkins.username'),
     password: atom.config.get('jenkins.password')
   }
+  options = if atom.config.get('jenkins.username') then httpAuthOptions else {}
 
   rest.get(url, options).on 'complete', (data) =>
     cb(data)
@@ -20,14 +19,14 @@ _get = (url, cb) ->
 module.exports = {
   getBuildOutput: (url, cb) ->
     if !_checkConfig()
-      cb('please define jenkins.username, jenkins.password, and jenkins.url in your atom config file.', '')
+      cb('please define jenkins.url (and optionally jenkins.username and jenkins.password) in your atom config file.', '')
     else
       _get url, (data) ->
         cb(undefined, data)
 
   getFailingBuilds: (cb) ->
     if !_checkConfig()
-      cb('please define jenkins.username, jenkins.password, and jenkins.url in your atom config file.', [])
+      cb('please define jenkins.url (and optionally jenkins.username and jenkins.password) in your atom config file.', [])
       return
 
     failedBuilds = []
