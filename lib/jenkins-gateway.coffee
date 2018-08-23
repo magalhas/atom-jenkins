@@ -32,7 +32,7 @@ module.exports = {
     failedBuilds = []
 
     #_get 'https://ci.braintreepayments.com/view/Venmo%20Touch/cc.xml', (data) ->
-    _get atom.config.get('jenkins.url') + '/cc.xml', (data) ->
+    _get atom.config.get('jenkins.url') + '/cc.xml?recursive', (data) ->
       xml2js.parseString data, (err, result) =>
         if err
           console.error(err)
