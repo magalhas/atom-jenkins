@@ -32,7 +32,6 @@ class BuildListView extends ScrollView
     $title.css("color", "red")
     builds.forEach (build) =>
       jenkinsUrl = atom.config.get 'jenkins.url'
-      build.webUrl = build.webUrl.replace /^.*(\/job.*)$/, jenkinsUrl + '$1'
       @appendBuild(build)
 
 
